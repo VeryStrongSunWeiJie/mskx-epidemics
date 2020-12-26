@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>mskx-epidmics-entity</module>
+        <module>mskx-epidmics-comment</module>
+        <module>mskx-epidmics-model</module>
+    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.swj</groupId>
+    <artifactId>mskx-epidemics</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>mskx-epidemics</name>
+    <description>冥思苦想的项目</description>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <lombok.version>1.18.16</lombok.version>
+        <mbatis-plus.version>3.4.1</mbatis-plus.version>
+        <kaptcha.version>0.0.9</kaptcha.version>
+        <springfox.version>3.0.0</springfox.version>
+        <qiniu.version>[7.4.0, 7.4.99]</qiniu.version>
+        <swagger.version>3.0.0</swagger.version>
+        <fastjson.version>1.2.75</fastjson.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>${qiniu.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.axet</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>${kaptcha.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mbatis-plus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!--引入SpringCloudAlibaba-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.2.1.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR6</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+<!--                <configuration>-->
+<!--                    <excludes>-->
+<!--                        <exclude>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok</artifactId>-->
+<!--                        </exclude>-->
+<!--                    </excludes>-->
+<!--                </configuration>-->
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
