@@ -7,9 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan("com.swj.dao")
 public class MaterialServeApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(MaterialServeApplication.class, args);
     }
-
 }
