@@ -1,5 +1,6 @@
 package com.swj.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.*;
 
@@ -16,9 +17,7 @@ import lombok.*;
 @ToString
 public class SysRoleMenu extends Model<SysRoleMenu> {
     //角色ID
-    private SysRole roleId;
+    private Integer roleId;
     //菜单ID
-    private SysMenu menuId;
-
-
+    private Integer menuId;
 }

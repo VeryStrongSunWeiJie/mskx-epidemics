@@ -1,5 +1,6 @@
 package com.swj.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.*;
 
@@ -15,9 +16,9 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class SysUserRole extends Model<SysUserRole> {
-    //	用户ID
-    private SysUser userId;
+    //用户ID
+    private Integer userId;
     //角色ID
-    private SysRole roleId;
+    private Integer roleId;
 
 }

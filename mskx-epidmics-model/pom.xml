@@ -28,5 +28,10 @@
             <artifactId>mskx-epidmics-entity</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.swj</groupId>
+            <artifactId>mskx-epidmics-comment</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

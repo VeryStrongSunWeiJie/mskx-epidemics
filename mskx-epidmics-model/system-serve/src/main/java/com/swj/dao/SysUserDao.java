@@ -13,4 +13,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysUserDao extends BaseMapper<SysUser> {
 
+    SysUser findByUserName(String userName);
 }

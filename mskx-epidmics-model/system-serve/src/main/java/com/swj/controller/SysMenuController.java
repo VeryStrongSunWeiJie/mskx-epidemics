@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.swj.Util.Result;
 import com.swj.entity.SysMenu;
 import com.swj.service.SysMenuService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -83,4 +85,20 @@ public class SysMenuController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.sysMenuService.removeByIds(idList));
     }
+
+    /**
+     * 获取三级菜单
+     *
+     * @param roleID
+     * @return
+     */
+    @ApiOperation("获取三级菜单")
+    @GetMapping("/getMenu")
+    public Result getMenu(@RequestParam("roleID") Integer roleID) {
+        //根据身份查询三级菜单
+        //获取当前用户身份
+        List<SysMenu> list = this.sysMenuService.getThreeLevelMenu(roleID);
+        return Result.success().data("list", list);
+    }
+
 }

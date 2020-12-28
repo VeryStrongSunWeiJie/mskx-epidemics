@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.swj.Util.Result;
 import com.swj.entity.SysDept;
 import com.swj.service.SysDeptService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -83,4 +85,11 @@ public class SysDeptController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.sysDeptService.removeByIds(idList));
     }
+    @ApiOperation(value = "获取部门三级菜单")
+    @GetMapping("/deptMenu")
+    public Result deptMenu(){
+        List<SysDept> sysDepts=this.sysDeptService.getMenu();
+        return Result.success().data("sysDepts",sysDepts);
+    }
+
 }
