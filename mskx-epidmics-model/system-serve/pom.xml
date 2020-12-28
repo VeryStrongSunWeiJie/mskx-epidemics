@@ -6,7 +6,7 @@
         <groupId>com.swj</groupId>
         <artifactId>mskx-epidmics-model</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <!--<relativePath/>  lookup parent from repository -->
     </parent>
     <groupId>com.swj</groupId>
     <artifactId>system-serve</artifactId>
