@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.swj.Util.Result;
 import com.swj.entity.SysLog;
 import com.swj.service.SysLogService;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +37,8 @@ public class SysLogController extends ApiController {
      * @return 所有数据
      */
     @GetMapping
-    public R selectAll(Page<SysLog> page, SysLog sysLog) {
-        return success(this.sysLogService.page(page, new QueryWrapper<>(sysLog)));
+    public Result selectAll(Page<SysLog> page, SysLog sysLog) {
+        return Result.success().data("data",this.sysLogService.page(page, new QueryWrapper<>(sysLog)));
     }
 
     /**
@@ -83,4 +84,7 @@ public class SysLogController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.sysLogService.removeByIds(idList));
     }
+
+
+
 }

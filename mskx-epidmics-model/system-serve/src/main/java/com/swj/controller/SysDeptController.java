@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.swj.Util.Result;
+import com.swj.log.SysLog;
 import com.swj.entity.SysDept;
 import com.swj.service.SysDeptService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -33,13 +35,13 @@ public class SysDeptController extends ApiController {
     /**
      * 分页查询所有数据
      *
-     * @param page    分页对象
-     * @param sysDept 查询实体
      * @return 所有数据
      */
-    @GetMapping
-    public R selectAll(Page<SysDept> page, SysDept sysDept) {
-        return success(this.sysDeptService.page(page, new QueryWrapper<>(sysDept)));
+    @GetMapping("/all/{current}/{size}")
+    public Result selectAll(@PathVariable Integer current,
+                       @PathVariable Integer size) {
+        Page<SysDept> page = new Page(current, size);
+        return Result.success().data("data",this.sysDeptService.page(page));
     }
 
     /**
@@ -85,11 +87,13 @@ public class SysDeptController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.sysDeptService.removeByIds(idList));
     }
+
+    @SysLog
     @ApiOperation(value = "获取部门三级菜单")
     @GetMapping("/deptMenu")
-    public Result deptMenu(){
-        List<SysDept> sysDepts=this.sysDeptService.getMenu();
-        return Result.success().data("sysDepts",sysDepts);
+    public Result deptMenu() {
+        List<SysDept> sysDepts = this.sysDeptService.getMenu();
+        return Result.success().data("sysDepts", sysDepts);
     }
 
 }

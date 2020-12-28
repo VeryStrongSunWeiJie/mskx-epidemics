@@ -1,4 +1,4 @@
-package com.swj.Util;
+package com.swj.log;
 
 import java.lang.annotation.*;
 
