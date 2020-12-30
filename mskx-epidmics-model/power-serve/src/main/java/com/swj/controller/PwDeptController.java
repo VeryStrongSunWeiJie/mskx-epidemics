@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.swj.Util.Result;
 import com.swj.entity.PwDept;
 import com.swj.service.PwDeptService;
 import org.springframework.web.bind.annotation.*;
@@ -82,5 +83,12 @@ public class PwDeptController extends ApiController {
     @DeleteMapping
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.pwDeptService.removeByIds(idList));
+    }
+
+
+    @GetMapping("/getMenu")
+    public Result getMenu(){
+        List<PwDept> list=this.pwDeptService.getMenus();
+        return Result.success().data("data",list);
     }
 }

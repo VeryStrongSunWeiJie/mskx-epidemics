@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.swj.Util.Result;
 import com.swj.entity.SysUser;
 import com.swj.service.SysUserService;
 import org.springframework.web.bind.annotation.*;
@@ -83,4 +84,24 @@ public class SysUserController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.sysUserService.removeByIds(idList));
     }
+
+    /**
+     * 模拟登录接口
+     * @return
+     */
+    @GetMapping("/login}")
+    public Result getLogin(@RequestParam("UserName") String UserName,@RequestParam("password") String password){
+        System.out.println("username = " + UserName);
+        System.out.println("password = " + password);
+        QueryWrapper<SysUser> wrapper=new QueryWrapper<>();
+        wrapper.eq("user_name",UserName);
+        SysUser one = this.sysUserService.getOne(wrapper);
+        if (one!=null&&password.equals(one.getPassword())){
+            //登录成功
+            return Result.success().message("成功");
+        }
+        //登录失败
+        return Result.error().message("失败");
+    }
+
 }
