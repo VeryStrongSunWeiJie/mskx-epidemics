@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 
@@ -89,16 +91,18 @@ public class SysMenuController extends ApiController {
     /**
      * 获取三级菜单
      *
-     * @param roleID
+     * @param request 获取用户身份
      * @return
      */
     @ApiOperation("获取三级菜单")
     @GetMapping("/getMenu")
-    public Result getMenu(@RequestParam("roleID") Integer roleID) {
+    public Result getMenu(/*@RequestParam("roleID") Integer roleID*/
+        HttpServletRequest request) {
         //根据身份查询三级菜单
+        HttpSession session = request.getSession();
+        Integer roleID=Integer.parseInt(session.getAttribute("role_id").toString());
         //获取当前用户身份
         List<SysMenu> list = this.sysMenuService.getThreeLevelMenu(roleID);
         return Result.success().data("list", list);
     }
-
 }
