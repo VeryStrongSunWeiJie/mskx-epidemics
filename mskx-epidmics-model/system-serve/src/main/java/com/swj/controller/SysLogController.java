@@ -58,6 +58,7 @@ public class SysLogController extends ApiController {
      * @param sysLog 实体对象
      * @return 新增结果
      */
+    @com.swj.log.SysLog
     @PostMapping
     public R insert(@RequestBody SysLog sysLog) {
         return success(this.sysLogService.save(sysLog));

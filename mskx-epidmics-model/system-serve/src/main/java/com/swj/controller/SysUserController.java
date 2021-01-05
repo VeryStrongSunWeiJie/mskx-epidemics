@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.swj.Util.Result;
 import com.swj.entity.SysUser;
 import com.swj.entity.SysUserRole;
+import com.swj.log.SysLog;
 import com.swj.service.SysUserRoleService;
 import com.swj.service.SysUserService;
 import com.swj.vo.SysUserVo;
@@ -104,6 +105,7 @@ public class SysUserController extends ApiController {
      * 模拟登录接口
      * @return
      */
+    @SysLog
     @PostMapping("/login")
     public Result getLogin(@RequestParam("username")String username
                             , @RequestParam("password")String password
@@ -131,6 +133,7 @@ public class SysUserController extends ApiController {
      * 实现用户退出
      * @return
      */
+    @SysLog
     @PostMapping("/logout")
     public Result logout(HttpServletRequest request){
         HttpSession session = request.getSession();

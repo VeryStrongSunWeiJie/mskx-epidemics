@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.swj.Util.Result;
 import com.swj.entity.SysMenu;
+import com.swj.log.SysLog;
 import com.swj.service.SysMenuService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -94,6 +95,7 @@ public class SysMenuController extends ApiController {
      * @param request 获取用户身份
      * @return
      */
+    @SysLog
     @ApiOperation("获取三级菜单")
     @GetMapping("/getMenu")
     public Result getMenu(/*@RequestParam("roleID") Integer roleID*/

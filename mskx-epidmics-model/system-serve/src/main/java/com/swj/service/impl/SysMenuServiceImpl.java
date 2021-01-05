@@ -7,6 +7,7 @@ import com.swj.dao.SysRoleMenuDao;
 import com.swj.entity.SysMenu;
 import com.swj.entity.SysRole;
 import com.swj.entity.SysRoleMenu;
+import com.swj.log.SysLog;
 import com.swj.service.SysMenuService;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
 
     @Resource
     private SysMenuDao sysMenuDao;
-
+   
     @Override
     public List<SysMenu> getThreeLevelMenu(Integer roleID) {
         //根据id获取用户所有权限

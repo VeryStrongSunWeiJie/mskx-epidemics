@@ -37,6 +37,7 @@ public class SysDeptController extends ApiController {
      *
      * @return 所有数据
      */
+    @SysLog
     @GetMapping("/all/{current}/{size}")
     public Result selectAll(@PathVariable Integer current,
                        @PathVariable Integer size) {
