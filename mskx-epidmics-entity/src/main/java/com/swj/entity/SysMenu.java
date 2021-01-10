@@ -55,5 +55,5 @@ public class SysMenu extends Model<SysMenu> {
     private String remark;
 
     @TableField(exist = false)
-    private List<SysMenu> sysMenus;
+    private List<SysMenu> children;
 }

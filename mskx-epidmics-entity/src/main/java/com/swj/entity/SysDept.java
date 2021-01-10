@@ -51,5 +51,5 @@ public class SysDept extends Model<SysDept> {
     //更新时间
     private Date updateTime;
     @TableField(exist = false)
-    private List<SysDept> sysDepts;
+    private List<SysDept> children;
 }

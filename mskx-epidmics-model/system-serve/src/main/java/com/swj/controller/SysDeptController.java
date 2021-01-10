@@ -40,9 +40,9 @@ public class SysDeptController extends ApiController {
     @SysLog
     @GetMapping("/all/{current}/{size}")
     public Result selectAll(@PathVariable Integer current,
-                       @PathVariable Integer size) {
+                            @PathVariable Integer size) {
         Page<SysDept> page = new Page(current, size);
-        return Result.success().data("data",this.sysDeptService.page(page));
+        return Result.success().data("data", this.sysDeptService.page(page));
     }
 
     /**
@@ -94,7 +94,10 @@ public class SysDeptController extends ApiController {
     @GetMapping("/deptMenu")
     public Result deptMenu() {
         List<SysDept> sysDepts = this.sysDeptService.getMenu();
-        return Result.success().data("sysDepts", sysDepts);
+        if (sysDepts.size() > 0) {
+            return Result.success().message("获取部门三级菜单成功").data("sysDepts", sysDepts);
+        }
+        return Result.error().message("获取部门三级菜单失败");
     }
 
 }

@@ -22,9 +22,6 @@ public class Result<T> implements Serializable  {
 
     private Map<String, Object> data=new HashMap<>();
 
-    //返回指定类型
-    private T data02;
-
     private Result() {
     }
 
@@ -40,7 +37,7 @@ public class Result<T> implements Serializable  {
         Result r=new Result();
         r.setSuccess(false);
         r.setCode(StatusCode.ERROR);
-        r.setMessage("成功返回了信息");
+        r.setMessage("失败了");
         return r;
     }
 

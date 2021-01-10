@@ -30,6 +30,8 @@ public class SysUser extends Model<SysUser> {
     private String nickName;
     //员工身份
     private String roleId;
+    //员工头像
+    private String images;
     //用户邮箱
     private String email;
     //手机号码

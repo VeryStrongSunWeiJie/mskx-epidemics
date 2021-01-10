@@ -39,7 +39,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
         List<SysMenu> collect = sysMenuByRoleId.stream().filter(sysMenu ->
                 sysMenu.getParentId() == 0
         ).map((map) -> {
-            map.setSysMenus(getSidebar(map, sysMenuByRoleId));
+            map.setChildren(getSidebar(map, sysMenuByRoleId));
             return map;
         }).sorted((menu1, menu2) -> {
             return ((menu1.getOrderNum() == null ? 0 : menu1.getOrderNum()) - (menu2.getOrderNum() == null ? 0 : menu2.getOrderNum()));
@@ -57,11 +57,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
         List<SysMenu> collect = all.stream().filter(sysMenu1 -> {
             return sysMenu1.getParentId() == sysMenu.getMenuId();
         }).map((entityClass) -> {
-            entityClass.setSysMenus(getSidebar(entityClass, all));
+            entityClass.setChildren(getSidebar(entityClass, all));
             return entityClass;
         }).sorted((menu1, menu2) -> {
             return ((menu1.getOrderNum() == null ? 0 : menu1.getOrderNum()) - (menu2.getOrderNum() == null ? 0 : menu2.getOrderNum()));
         }).collect(Collectors.toList());
+
         return collect;
     }
 }

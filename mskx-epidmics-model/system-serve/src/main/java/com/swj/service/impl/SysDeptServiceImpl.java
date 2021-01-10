@@ -29,7 +29,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptDao, SysDept> impleme
         List<SysDept> collect = sysDepts.stream().filter(sysDept ->
                 sysDept.getParentId() == 0
         ).map((dept) -> {
-            dept.setSysDepts(getMenu2(dept, sysDepts));
+            dept.setChildren(getMenu2(dept, sysDepts));
             return dept;
         }).collect(Collectors.toList());
         return collect;
@@ -39,7 +39,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptDao, SysDept> impleme
         List<SysDept> collect = all.stream().filter(sysDept1 ->
                 sysDept1.getParentId() == sysDept.getDeptId()
         ).map((dept) -> {
-            dept.setSysDepts(getMenu2(dept, all));
+            dept.setChildren(getMenu2(dept, all));
             return dept;
         }).collect(Collectors.toList());
         return collect;
