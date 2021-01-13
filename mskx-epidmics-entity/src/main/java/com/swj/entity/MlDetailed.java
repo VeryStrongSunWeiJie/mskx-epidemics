@@ -24,8 +24,10 @@ public class MlDetailed extends Model<MlDetailed> {
     private Integer mlDid;
     //物资名称
     private String mlDname;
+    //物资类型
+    private Integer mlTid;
     //物品重量（斤）
-    private String mlQuality;
+    private Integer mlQuality;
     //来自城市
     private String mlCity;
     //指定捐赠地点（可以为null）

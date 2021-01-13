@@ -67,8 +67,8 @@ public class LogUtils {
             sysLog.setLogAddress(localHost.getHostAddress());
             sysLog.setLogAuthor("当前用户");
             sysLog.setRemark(methodName);
-            sysLog.setLogDescribe(e.getMessage());
-            sysLog.setLogName(message);
+            sysLog.setLogDescribe(e.getMessage()+":"+e.toString());
+            sysLog.setLogName(methodName);
             boolean save = sysLogService.save(sysLog);
             if (save) {
                 log.info("成功");

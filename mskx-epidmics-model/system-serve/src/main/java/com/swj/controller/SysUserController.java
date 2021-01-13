@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.swj.Util.JwtUtil;
+import com.swj.Util.PageUtils;
 import com.swj.Util.Result;
 import com.swj.entity.SysRole;
 import com.swj.entity.SysUser;
@@ -23,7 +25,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -140,6 +144,7 @@ public class SysUserController extends ApiController {
         SysUserRole one = this.sysUserRoleService.getOne(wrapper);
         //根据rold_id查询身份
         SysRole byId = this.sysRoleService.getById(one.getRoleId());
+        user.setPassword(null);
         return Result.success().data("data", user).data("role", byId.getRoleName());
     }
 
@@ -216,7 +221,7 @@ public class SysUserController extends ApiController {
      */
     @SysLog
     @PostMapping("/login")
-    public Result getLogins(@RequestBody UserVo sysUserVo, HttpServletRequest request) {
+    public Result<?> getLogins(@RequestBody UserVo sysUserVo, HttpServletRequest request) {
         System.out.println("sysUserVo.getPassword() = " + sysUserVo.getPassword());
         HttpSession session = request.getSession();
         QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
@@ -233,7 +238,13 @@ public class SysUserController extends ApiController {
                 session.setAttribute("user", one);
                 session.setAttribute("role_id", one1.getRoleId());
                 //登录成功
-                return Result.success().data("user", one).data("token", "admin-token");
+                Map<String, String> map = new HashMap<>();
+                map.put("user", one.toString());
+                map.put("role_id", one1.getRoleId().toString());
+                String sign = JwtUtil.sign(map);
+                //不能让用户可以直接看见密码
+                one.setPassword("*****");
+                return Result.success().data("user", one).data("token", sign);
             } else {
                 //登录失败
                 return Result.error().message("对不起，该用户暂时未被授权");
@@ -247,13 +258,16 @@ public class SysUserController extends ApiController {
     /**
      * 根据部门编号获取用户信息
      */
+//    @SysLog
+//    @GetMapping("/getUserByDeptId2/{DeptId}")
+//    public Result<?> getUserByDeptId2(@PathVariable Integer DeptId){
+//        List<SysUserVo> user =this.sysUserService.getSysUserByDeptId(DeptId);
+//        return Result.success().message("数据返回成功").data("user",user);
+//    }
     @SysLog
-    @GetMapping("/getUserByDeptId/{DeptId}")
-    public Result getUserByDeptId(@PathVariable Integer DeptId){
-
-        List<SysUserVo> user =this.sysUserService.getSysUserByDeptId(DeptId);
-
-        return Result.success().message("数据返回成功").data("user",user);
+    @PostMapping("/getUserByDeptId")
+    public Result<?> getUserByDeptId(@RequestBody Map<String, Object> map) {
+        PageUtils pageUser = this.sysUserService.getSysUserByMaps(map);
+        return Result.success().message("数据返回成功").data("user", pageUser);
     }
-
 }

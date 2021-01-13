@@ -1,10 +1,12 @@
 package com.swj.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.swj.Util.PageUtils;
 import com.swj.entity.SysUser;
 import com.swj.vo.SysUserVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户信息表(SysUser)表服务接口
@@ -14,5 +16,6 @@ import java.util.List;
  */
 public interface SysUserService extends IService<SysUser> {
 
-    List<SysUserVo> getSysUserByDeptId(Integer deptId);
+    PageUtils getSysUserByMaps(Map<String, Object> map);
+
 }

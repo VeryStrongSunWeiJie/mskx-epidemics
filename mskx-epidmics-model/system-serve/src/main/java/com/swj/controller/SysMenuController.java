@@ -93,18 +93,21 @@ public class SysMenuController extends ApiController {
      * 获取三级菜单
      *
      * @param request 获取用户身份
-     * @return
+     * @return 通用统一返回类
      */
     @SysLog
     @ApiOperation("获取三级菜单")
     @GetMapping("/getMenu")
-    public Result getMenu(/*@RequestParam("roleID") Integer roleID*/
+    public Result<?> getMenu(/*@RequestParam("roleID") Integer roleID*/
         HttpServletRequest request) {
         //根据身份查询三级菜单
         HttpSession session = request.getSession();
         Integer roleID=Integer.parseInt(session.getAttribute("role_id").toString());
         //获取当前用户身份
-        List<SysMenu> list = this.sysMenuService.getThreeLevelMenu(roleID);
-        return Result.success().data("list", list);
+        if (roleID!=null){
+            List<SysMenu> list = this.sysMenuService.getThreeLevelMenu(roleID);
+            return Result.success().data("list", list);
+        }
+        return  null;
     }
 }
